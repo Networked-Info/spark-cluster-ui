@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>tcw</groupId>
+  <artifactId>spark-scratch</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>spark-scratch</name>
+  
+  
+  <dependencies>
+  
+    <dependency>
+    	<groupId>com.fasterxml.jackson.module</groupId>
+        <artifactId>jackson-module-scala_2.11</artifactId>
+        <version>2.7.4</version>
+    </dependency> 
+    
+	<dependency>
+		<groupId>com.github.rholder</groupId>
+		<artifactId>snowball-stemmer</artifactId>
+		<version>1.3.0.581.1</version>
+	</dependency>
+
+    <dependency>
+    	<groupId>com.sparkjava</groupId>
+    	<artifactId>spark-core</artifactId>
+    	<version>2.7.2</version>
+	</dependency>
+  
+	<dependency>
+		<groupId>com.bpodgursky</groupId>
+		<artifactId>jbool_expressions</artifactId>
+		<version>1.13</version>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+	<dependency>
+    	<groupId>org.slf4j</groupId>
+    	<artifactId>slf4j-simple</artifactId>
+    	<version>1.7.25</version>
+	</dependency>
+  
+	<dependency>
+		<groupId>org.apache.spark</groupId>
+		<artifactId>spark-core_2.11</artifactId>
+		<version>2.2.1</version>
+	</dependency>
+
+  </dependencies>
+<!-- https://mvnrepository.com/artifact/org.apache.spark/spark-core -->
+</project>
