@@ -17,7 +17,7 @@ public class DocMap {
 			int docId = Integer.valueOf(info[1]);
 			
 			map.put(docId, csvId);
-			System.out.println(docId);
+
 		}
 	}
 }

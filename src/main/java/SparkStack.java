@@ -58,12 +58,7 @@ public class SparkStack {
 		System.out.println("finished processing query");
 		
 		List<String[]> snippets = getSnippets(last); 
-		int len = 0;
-		for (String[] s : snippets) {
-			len++;
-			System.out.println(Arrays.toString(s));
-		}
-		System.out.println(len);
+
 		return snippets;
 	}
 	
@@ -98,11 +93,7 @@ public class SparkStack {
 		s.substring(StringUtils.ordinalIndexOf(s, "\"", 1) + 1, StringUtils.ordinalIndexOf(s, "\"", 2))
 		.equals(finalTerm))
 				.first());
-		System.out.println(json.toString());
 		List<Tuple2<String,Double[]>> fileList = parse(term, json);
-		//		for (Integer i : fileList) {
-		//			System.out.print(i + " ");
-		//		}
 		System.out.println();
 		rddStack.push(sparkContext.parallelizePairs(fileList));
 		System.out.println("New rddStack Size: " + rddStack.size());
@@ -150,7 +141,9 @@ public class SparkStack {
 	}
 
 	private static JavaPairRDD<String,Double[]> operateAND(JavaPairRDD<String,Double[]> set1, JavaPairRDD<String,Double[]> set2) {
-		return set1.intersection(set2).reduceByKey((Function2<Double[], Double[], Double[]>) (a, b) -> new Double[]{a[0]+b[0], Math.min(a[1], b[1])});
+		List<String> commonKeys = set1.keys().intersection(set2.keys()).collect();
+		JavaPairRDD<String,Double[]> commonRec = set1.filter(e1 -> commonKeys.contains(e1._1)).union(set2.filter(e2 -> commonKeys.contains(e2._1)));
+		return commonRec.reduceByKey((Function2<Double[], Double[], Double[]>) (a, b) -> new Double[]{a[0]+b[0], Math.min(a[1], b[1])});
 	}
 
 	private static JavaPairRDD<String,Double[]> operateOR(JavaPairRDD<String,Double[]> set1, JavaPairRDD<String,Double[]> set2) {
